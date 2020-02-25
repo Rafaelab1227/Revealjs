@@ -2,12 +2,11 @@
 title: "Revealjs"
 author: "Rafaela Becerra"
 date: "February 2020"
-output: 
+output:
   revealjs::revealjs_presentation:
-  theme: moon
-  incremental: true
-  highlight: pygments
-  center: true
+    theme: moon
+    highlight: pygments
+    center: true
 
 ---
 
@@ -36,16 +35,29 @@ library(skimr)
 datas=skim(data)
 ```
 
-## Variables
-The information contained is:
+## Variables {#nextsteps .emphasized}
+#nextsteps {
+   color: blue;
+}
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+.emphasized {
+   font-size: 1.2em;
+}
+The information given for each car is:
+
+- CarType: model
+- Age: years passed since production
+- Price: price ask by the owners, expressed in $1,000
+- Mileage: mileage in km 
 
 </section>
+## Lets look at "Mazda 6" observations:
 
-## Characteristics
+## Now, "Accord" observations:
+
+## Finnally, "Maxima" observations:
+
+## The three joint:
 ```{r, include=FALSE}
 library(plotly)
 ```
