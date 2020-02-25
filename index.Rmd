@@ -1,35 +1,61 @@
 ---
 title: "Revealjs"
 author: "Rafaela Becerra"
-date: "25/2/2020"
-output: revealjs::revealjs_presentation
+date: "February 2020"
+output: 
+  revealjs::revealjs_presentation:
+  theme: moon
+  incremental: true
+  highlight: pygments
+  center: true
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## Dataset {data-transition="zoom"}
+<section data-background="image.jpg">
+Data from cars.com in 2017 for a sample of 90 cars in Ohio of three models:
+<span style="display: inline-block;" class="fragment fade-up" data-fragment-index="1">Mazda 6, </span>
+<span style="display: inline-block;" class="fragment fade-down" data-fragment-index="2">Honda Accord, </span>
+<span style="display: inline-block;" class="fragment fade-left" data-fragment-index="3">and Toyota Maxima.</span>
+</section>
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+<section data-transition="zoom">
+## Summary 
+```{r, include = FALSE}
+library(Stat2Data)
+data("ThreeCars2017")
+data=ThreeCars2017
+```
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+```{r, echo=FALSE}
+library(skimr)
+datas=skim(data)
+```
 
-## Slide with Bullets
+## Variables
+The information contained is:
 
 - Bullet 1
 - Bullet 2
 - Bullet 3
 
-## Slide with R Output
+</section>
 
-```{r cars, echo = TRUE}
-summary(cars)
+## Characteristics
+```{r, include=FALSE}
+library(plotly)
 ```
 
-## Slide with Plot
+```{r, echo=FALSE, warning=FALSE}
+p <- plot_ly(data, x = ~Age, y = ~Price, z = ~Mileage, color = ~CarType) %>%
+   add_markers()%>%layout(scene = list(xaxis = list(title = 'Age from production'),
+                     yaxis = list(title = 'Price in $1,000'),
+                     zaxis = list(title = 'Mileage in km')))
+p
 
-```{r pressure}
-plot(pressure)
 ```
 
