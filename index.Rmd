@@ -14,60 +14,95 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Dataset {data-transition="zoom"}
+## {data-transition="zoom"}
+<h1 style="background-color:#ff6347;">Dataset</h1>
 <section data-background="image.jpg">
 Data from cars.com in 2017 for a sample of 90 cars in Ohio of three models:
-<span style="display: inline-block;" class="fragment fade-up" data-fragment-index="1">Mazda 6, </span>
-<span style="display: inline-block;" class="fragment fade-down" data-fragment-index="2">Honda Accord, </span>
+<span style="display: inline-block;" class="fragment fade-left" data-fragment-index="1">Mazda 6, </span>
+<span style="display: inline-block;" class="fragment fade-left" data-fragment-index="2">Honda Accord, </span>
 <span style="display: inline-block;" class="fragment fade-left" data-fragment-index="3">and Toyota Maxima.</span>
 </section>
 
-<section data-transition="zoom">
-## Summary 
 ```{r, include = FALSE}
 library(Stat2Data)
 data("ThreeCars2017")
 data=ThreeCars2017
 ```
 
-```{r, echo=FALSE}
-library(skimr)
-datas=skim(data)
-```
+## {data-background=#000000}
+</br>
+<h1 style="background-color:rgb(255, 99, 71);">The information given for each car is:</h1>
 
-## Variables {#nextsteps .emphasized}
-#nextsteps {
-   color: blue;
-}
-
-.emphasized {
-   font-size: 1.2em;
-}
-The information given for each car is:
-
-- CarType: model
-- Age: years passed since production
-- Price: price ask by the owners, expressed in $1,000
-- Mileage: mileage in km 
-
+<section>
+<p class="fragment fade-in-then-semi-out"">CarType: model</p>
+<p class="fragment fade-in-then-semi-out">Age: years passed since production</p>
+<p class="fragment fade-in-then-semi-out">Price: price ask by the owners, expressed in $1,000</p>
+<p class="fragment fade-in-then-semi-out">Mileage: mileage in 1000</p>
 </section>
 ## Lets look at "Mazda 6" observations:
-
-## Now, "Accord" observations:
-
-## Finnally, "Maxima" observations:
-
-## The three joint:
-```{r, include=FALSE}
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
 library(plotly)
 ```
 
-```{r, echo=FALSE, warning=FALSE}
-p <- plot_ly(data, x = ~Age, y = ~Price, z = ~Mileage, color = ~CarType) %>%
-   add_markers()%>%layout(scene = list(xaxis = list(title = 'Age from production'),
-                     yaxis = list(title = 'Price in $1,000'),
-                     zaxis = list(title = 'Mileage in km')))
+```{r, message=FALSE, echo=FALSE, warning=FALSE, fig.align="center"}
+d <- data[data$CarType=="Mazda6",]
+
+p <- plot_ly(
+  d, x = ~Age, y = ~Mileage, text = ~paste("Mileage: ", Mileage, '$<br>Age:', Age),
+  color = ~Price, size = ~Price
+)
+
 p
 
 ```
 
+## Now, "Accord" observations:
+```{r, message=FALSE, echo=FALSE, warning=FALSE, fig.align="center"}
+d <- data[data$CarType=="Accord",]
+
+p <- plot_ly(
+  d, x = ~Age, y = ~Mileage, text = ~paste("Mileage: ", Mileage, '$<br>Age:', Age),
+  color = ~Price, size = ~Price
+)
+
+p
+
+```
+
+## Finnally, "Maxima" observations:
+```{r, message=FALSE, echo=FALSE, warning=FALSE, fig.align="center"}
+d <- data[data$CarType=="Maxima",]
+
+p <- plot_ly(
+  d, x = ~Age, y = ~Mileage, text = ~paste("Mileage: ", Mileage, '$<br>Age:', Age),
+  color = ~Price, size = ~Price
+)
+
+p
+
+```
+
+
+## The three joint: {data-background=#58D3F7}
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE, fig.align="center"}
+p <- plot_ly(data, x = ~Age, y = ~Price, z = ~Mileage, color = ~CarType) %>%
+   add_markers()%>%layout(scene = list(xaxis = list(title = 'Age from production'),
+                     yaxis = list(title = 'Price in $1,000'),
+                     zaxis = list(title = 'Mileage in 1,000')))
+p
+
+```
+
+## {data-background=#000000}
+<h1 style="border:2px solid DodgerBlue;">Some insights</h1>
+
+<ul>
+<li class="fragment roll-in" data-fragment-index="1">Accord, Mazda 6 and Massima can be comparable in terms of price.</li>
+<li class="fragment roll-in" data-fragment-index="2">There are older Mazda 6 offer than Accord and Massima.</li>
+<li class="fragment roll-in" data-fragment-index="3">Mileage has a higher impact on price than age. </li>
+</ul>
+
+<br/><br/>
+
+<p class="fragment roll-in">For more information about the dataset and other datasets see: <https://www.rdocumentation.org/packages/Stat2Data/versions/2.0.0></p>
